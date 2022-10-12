@@ -6,4 +6,4 @@ You simply place one above the other at any vertical distance, and jump/crouch o
 block to go in between the different heights.
 
 ## Crafting
-![Crafting Recipe](https://raw.githubusercontent.com/VenomCodeDev/JumpVaderMod/1.19/assets/JumpVaderCraftingRecipe.png)
+![Crafting Recipe](https://github.com/VenomCodeDev/JumpVaderMod/blob/d1cd96ccd846d3249a4a7fcb298e740775ee344c/assets/JumpVaderCraftingRecipe.png?raw=true)
