@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "jumpvader",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Jump Vader",
+  "description": "Ender Vaders ServerSide Only",
   "authors": [
-    "Me!"
+    "VenomCodeDev"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/VenomCodeDev/JumpVaderMod",
+    "sources": "https://github.com/VenomCodeDev/JumpVaderMod"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/jumpvader/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "dev.venomcode.jumpvader.JumpVaderMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "jumpvader.mixins.json"
   ],
 
   "depends": {

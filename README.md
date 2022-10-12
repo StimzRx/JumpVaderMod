@@ -1,9 +1,9 @@
-# Fabric Example Mod
+# Jump Vader - A Fabric Server-Side Elevator Mod
 
-## Setup
+## What is it
+I'ts a mod that lets you place "Jump Vader" blocks similar to the Quark mod's elevators.
+You simply place one above the other at any vertical distance, and jump/crouch on top of the
+block to go in between the different heights.
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+## Crafting
+![Crafting Recipe](https://raw.githubusercontent.com/VenomCodeDev/JumpVaderMod/1.19/assets/JumpVaderCraftingRecipe.png)
