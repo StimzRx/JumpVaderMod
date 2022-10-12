@@ -13,7 +13,7 @@
     "sources": "https://github.com/VenomCodeDev/JumpVaderMod"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/jumpvader/icon.png",
 
   "environment": "*",
