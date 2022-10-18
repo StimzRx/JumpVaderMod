@@ -20,12 +20,16 @@ public class JumpVaderConfig
     {
         return rootNode.node(MAX_VERTICAL_BLOCKS_TAG).getInt(128);
     }
+    public String getAlternativeBlock()
+    {
+        return rootNode.node(USE_ALTERNATIVE_BLOCK_TAG).getString("default");
+    }
 
     public void setupConfig() throws SerializationException
     {
-
         rootNode.node(ENABLED_TAG).comment(ENABLED_TAG_COMMENT).set(getEnabled());
         rootNode.node(MAX_VERTICAL_BLOCKS_TAG).comment(MAX_VERTICAL_BLOCKS_TAG_COMMENT).set(getMaxVerticalBlocks());
+        rootNode.node(USE_ALTERNATIVE_BLOCK_TAG).comment(USE_ALTERNATIVE_BLOCK_TAG_COMMENT).set(getAlternativeBlock());
 
         save();
     }
@@ -35,6 +39,8 @@ public class JumpVaderConfig
     private static final String ENABLED_TAG_COMMENT = "Toggles this entire mod on and off.";
     private static final String MAX_VERTICAL_BLOCKS_TAG = "max_blocks_vertical";
     private static final String MAX_VERTICAL_BLOCKS_TAG_COMMENT = "The maximum amount of vertical blocks to travel when using the jump vader block.";
+    private static final String USE_ALTERNATIVE_BLOCK_TAG = "use_alternative_block";
+    private static final String USE_ALTERNATIVE_BLOCK_TAG_COMMENT = "Block to use for clients. Allowed Values: default, stained_glass, white_wool";
 
 
     public JumpVaderConfig()

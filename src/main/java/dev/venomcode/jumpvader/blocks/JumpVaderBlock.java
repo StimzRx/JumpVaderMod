@@ -18,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 
 public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderListener
 {
-
     public JumpVaderBlock(Settings settings, Block virtualBlock)
     {
         super(settings, virtualBlock);
@@ -27,11 +26,13 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
     @Override
     public boolean onJump(BlockPos pos , ServerPlayerEntity player )
     {
+        if(!JumpVaderMod.getConfig().getEnabled())
+            return false;
         pos = pos.up();
         ServerWorld w = player.getWorld();
         int count = 0;
 
-        while(count < JumpVaderMod.getConfig().getMaxVerticalBlocks() && pos.getY() < 318)
+        while(count < JumpVaderMod.getConfig().getMaxVerticalBlocks() && pos.getY() < 316)
         {
             Block blk = w.getBlockState( pos ).getBlock();
 
@@ -44,7 +45,7 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
                     player.networkHandler.requestTeleport( tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f, player.getHeadYaw(), 0f );
 
                     w.playSound( null, tpPos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1.5f );
-                    w.spawnParticles( ParticleTypes.END_ROD, tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f, 10, 0, 0, 0, 0.25f );
+                    w.spawnParticles( ParticleTypes.POOF, tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f, 5, 0, 0, 0, 0.25f );
 
                     return true;
                 }
@@ -58,6 +59,9 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
     @Override
     public void onCrouch( BlockPos pos , ServerPlayerEntity player )
     {
+        if(!JumpVaderMod.getConfig().getEnabled())
+            return;
+
         pos = pos.down();
         ServerWorld w = player.getWorld();
         int count = 0;
@@ -75,7 +79,7 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
                     player.networkHandler.requestTeleport( tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f, player.getHeadYaw(), 0f );
 
                     w.playSound( null, tpPos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1.5f );
-                    w.spawnParticles( ParticleTypes.END_ROD, tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f, 10, 0, 0, 0, 0.25f );
+                    w.spawnParticles( ParticleTypes.POOF, tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f, 5, 0, 0, 0, 0.25f );
 
                     return;
                 }
@@ -89,7 +93,11 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
     @Override
     public Block getPolymerBlock(BlockState state)
     {
-        return Blocks.ORANGE_STAINED_GLASS;
+        return switch (JumpVaderMod.getConfig().getAlternativeBlock()) {
+            case "tinted_glass" -> Blocks.TINTED_GLASS;
+            case "white_wool" -> Blocks.WHITE_WOOL;
+            default -> Blocks.ORANGE_STAINED_GLASS;
+        };
     }
 
     private static final Identifier _identifier = new Identifier( JumpVaderMod.MODID, "jumpvader_block" );
