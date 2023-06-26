@@ -2,12 +2,13 @@ package dev.venomcode.jumpvader.blocks;
 
 import dev.venomcode.jumpvader.JumpVaderMod;
 import dev.venomcode.jumpvader.ifaces.IJumpVaderListener;
-import eu.pb4.polymer.api.block.SimplePolymerBlock;
+import eu.pb4.polymer.core.api.block.PolymerBlock;
+import eu.pb4.polymer.core.api.block.SimplePolymerBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -16,11 +17,10 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
-public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderListener
-{
-    public JumpVaderBlock(Settings settings, Block virtualBlock)
-    {
-        super(settings, virtualBlock);
+public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderListener {
+
+    public JumpVaderBlock(Settings settings, Block polymerBlock) {
+        super(settings, polymerBlock);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
         if(!JumpVaderMod.getConfig().getEnabled())
             return false;
         pos = pos.up();
-        ServerWorld w = player.getWorld();
+        ServerWorld w = (ServerWorld) player.getWorld();
         int count = 0;
 
         while(count < JumpVaderMod.getConfig().getMaxVerticalBlocks() && pos.getY() < 316)
@@ -63,7 +63,7 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
             return;
 
         pos = pos.down();
-        ServerWorld w = player.getWorld();
+        ServerWorld w = (ServerWorld) player.getWorld();
         int count = 0;
 
         while(count < JumpVaderMod.getConfig().getMaxVerticalBlocks() && pos.getY() >= -64)

@@ -1,15 +1,15 @@
 plugins {
-	id 'fabric-loom' version '1.0-SNAPSHOT'
+	id 'fabric-loom' version '1.2-SNAPSHOT'
 	id 'maven-publish'
 	id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
 
 repositories {
 	// Add repositories to retrieve artifacts from in here.
@@ -18,8 +18,9 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 
-	mavenCentral()
 	maven { url 'https://maven.nucleoid.xyz' }
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -36,10 +37,10 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 
-	shadow(implementation('org.spongepowered:configurate-hocon:4.1.2'))
+	include(modImplementation("eu.pb4:polymer-core:${project.polymer_version}"))
+	include(modImplementation("xyz.nucleoid:server-translations-api:${project.server_translations_api_version}"))
 
-	modImplementation include("eu.pb4:polymer:${project.polymer_version}")
-	modImplementation include("fr.catcore:server-translations-api:${project.server_translation_api_version}")
+	shadow(implementation('org.spongepowered:configurate-hocon:4.1.2'))
 }
 
 processResources {
@@ -51,7 +52,6 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	it.options.release = 17
 }
 
@@ -60,21 +60,21 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
-	archiveClassifier.set("dev")
 }
-
 shadowJar {
 	configurations = [project.configurations.shadow]
 	archiveClassifier.set("dev")
 	relocate "net.objecthunter", "de.siphalor.spiceoffabric.shadow.net.objecthunter"
 }
-
 remapJar {
 	dependsOn(shadowJar)
 	inputFile = tasks.shadowJar.archiveFile
