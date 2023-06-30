@@ -90,15 +90,5 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
 
     }
 
-    @Override
-    public Block getPolymerBlock(BlockState state)
-    {
-        return switch (JumpVaderMod.getConfig().getAlternativeBlock()) {
-            case "tinted_glass" -> Blocks.TINTED_GLASS;
-            case "white_wool" -> Blocks.WHITE_WOOL;
-            default -> Blocks.ORANGE_STAINED_GLASS;
-        };
-    }
-
     private static final Identifier _identifier = new Identifier( JumpVaderMod.MODID, "jumpvader_block" );
 }
