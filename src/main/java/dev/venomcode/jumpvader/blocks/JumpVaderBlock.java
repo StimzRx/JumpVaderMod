@@ -42,7 +42,7 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
 
                 if(w.getBlockState( tpPos ).getBlock().equals( Blocks.AIR ) && w.getBlockState( tpPos.up() ).getBlock().equals( Blocks.AIR ))
                 {
-                    player.requestTeleport( tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f );
+                    player.teleport( tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f );
 
                     w.playSound( null, tpPos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1.5f );
                     w.spawnParticles( ParticleTypes.POOF, tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f, 5, 0, 0, 0, 0.25f );
@@ -76,7 +76,7 @@ public class JumpVaderBlock extends SimplePolymerBlock implements IJumpVaderList
 
                 if(w.getBlockState( tpPos ).getBlock().equals( Blocks.AIR ) && w.getBlockState( tpPos.up() ).getBlock().equals( Blocks.AIR ))
                 {
-                    player.requestTeleport( tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f );
+                    player.teleport( tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f );
 
                     w.playSound( null, tpPos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1.5f );
                     w.spawnParticles( ParticleTypes.POOF, tpPos.getX() + 0.5f, tpPos.getY(), tpPos.getZ() + 0.5f, 5, 0, 0, 0, 0.25f );
